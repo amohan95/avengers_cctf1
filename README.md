@@ -13,7 +13,6 @@ Teams
 
 ### Red
 
-1. Receive and respond to White and Blues client requests for `*.red.net` sites (Dongil)
-2. Perform DNS spoofing attacks that are launched when clients acces your `*.red.net` sites (Jerry)
-3. Impersonate Blue and White domains to clients that have been poisoned (Jerry, William, Weidi)
-4. Identify whether your attacks against bcache and wcache have been successful (Weidi)
+1. Receive and respond to White and Blues client requests for `*.red.net` sites. Impersonate Blue and White domains to clients that have been poisoned (Dongil)
+2. Perform DNS spoofing attacks that are launched when clients acces your `*.red.net` sites (Jerry, Will)
+3. Identify whether your attacks against bcache and wcache have been successful (Weidi)
