@@ -11,12 +11,6 @@
 int main()
 {
 	struct dns_hdr hdr = { 0 };
-	assert(qr(&hdr) == 0);
-	set_qr(1, &hdr);
-	assert(qr(&hdr) == 1);
-	assert(opcode(&hdr) == 0);
-	set_opcode(1, &hdr);
-	assert(opcode(&hdr) == 1);
 	/*
 	int s = sock_init();
 	struct sockaddr_in si = { 0 };
