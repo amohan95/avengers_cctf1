@@ -1,14 +1,17 @@
-CC=clang
+CC=gcc
 CFLAGS=-std=c99 -Ofast -Wpedantic
 IDIR=lib
 ODIR=bin
 
 all: spoof
 
-spoof: spoof.o init.o
-	$(CC) $(CFLAGS) $(LIBS) -I$(IDIR) -o $(ODIR)/$@ $(ODIR)/spoof.o $(ODIR)/init.o
+spoof: spoof.o init.o dns.o
+	$(CC) $(CFLAGS) $(LIBS) -I$(IDIR) -o $(ODIR)/$@ $(ODIR)/spoof.o $(ODIR)/dns.o $(ODIR)/init.o
 
 spoof.o: spoof.c
+	$(CC) -c $(CFLAGS) -I$(IDIR) -o $(ODIR)/$@ $<
+
+dns.o: dns.c
 	$(CC) -c $(CFLAGS) -I$(IDIR) -o $(ODIR)/$@ $<
 
 init.o: init.c
