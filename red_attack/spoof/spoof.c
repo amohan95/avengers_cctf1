@@ -11,7 +11,6 @@
 int main()
 {
 	struct dns_hdr hdr = { 0 };
-	/*
 	int s = sock_init();
 	struct sockaddr_in si = { 0 };
 	int si_init_ret = si_init(&si, WCACHE_IP, 53);
@@ -26,6 +25,5 @@ int main()
 		perror("close");
 		exit(1);
 	}
-	*/
 	return 0;
 }
