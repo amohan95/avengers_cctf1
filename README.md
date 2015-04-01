@@ -15,7 +15,8 @@ Teams
 
 1. Determine how to configure your server to respond to requests for the White and Blue domains and populate your server with some Web pages. When responding to requests for Blue and White domains these Web pages should resemble the ones hosted by Blue and White web servers. (Dongil)
 2. Produce mechanisms for launching DNS spoofing attack. (Jerry, Will)
-3. Develop a method to determine whether your attacks work. (Weidi)
+3. Impersonate Blue and White domains to clients that have been poisoned. (Raymond)
+4. Develop a method to determine whether your attacks work. (Weidi)
 
 Notes
 -----
