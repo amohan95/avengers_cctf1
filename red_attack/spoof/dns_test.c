@@ -29,9 +29,12 @@ int main()
 	size_t len_q_data = len_dns_q(len_name_data);
 	uint8_t q_data[len_q_data];
 	build_dns_q(q_data, name_data, len_name_data);
+	size_t len_q_packet_data = len_dns_q_packet(len_q_data);
+	uint8_t q_packet_data[len_q_packet_data];
+	build_dns_q_packet(q_packet_data, q_data, len_q_data, 1);
 
-	for (size_t i = 0; i < len_q_data; ++i) {
-		printf("%i\n", q_data[i]);
+	for (size_t i = 0; i < len_q_packet_data; ++i) {
+		printf("%i\n", q_packet_data[i]);
 	}
 
 	return 0;

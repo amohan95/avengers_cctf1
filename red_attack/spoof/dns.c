@@ -66,39 +66,22 @@ size_t len_dns_q(size_t len_name_data)
 	return sizeof(struct dns_q_bdy) + len_name_data;
 }
 
-/*
- * Old, incorrect question builder (attempted functionality should be moved to
- * e.g. build_dns_packet_q).
- */
-/*
-int build_dns_q(uint8_t *q_data, uint16_t id, char *name[], size_t len_name)
+void build_dns_q_packet(uint8_t *q_packet_data,
+                        uint8_t *q_data,
+                        size_t  len_q_data,
+                        uint8_t id)
 {
 	union dns_hdr_data hdr_data = { 0 };
 	hdr_data.hdr.id = id;
+	/* rd = 1 */
 	hdr_data.hdr.flags[0] = 1;
 	hdr_data.hdr.qdc = 1;
-
-	for (size_t i = 0; i < len_name; ++i) {
-		if (sizeof name[i] > (1 << 6) - 1) {
-			errno = EINVAL;
-			return 1;
-		}
-	}
-
-	size_t len_hdr_data = sizeof (struct dns_hdr);
-	memcpy(q_data, hdr_data.data, len_hdr_data);
-	size_t off = len_hdr_data;
-
-	for (size_t i = 0; i < len_name; ++i) {
-		uint8_t len_label = strlen(name[i]);
-		q_data[off] = len_label;
-		++off;
-		memcpy(q_data + off, name[i], len_label);
-		off += len_label;
-	}
-
-	q_data[off] = 0;
-
-	return 0;
+	size_t len_hdr_data = sizeof(union dns_hdr_data);
+	memcpy(q_packet_data, hdr_data.data, len_hdr_data);
+	memcpy(q_packet_data + len_hdr_data, q_data, len_q_data);
 }
-*/
+
+size_t len_dns_q_packet(size_t len_q_data)
+{
+	return sizeof(union dns_hdr_data) + len_q_data;
+}

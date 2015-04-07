@@ -30,6 +30,21 @@ void build_dns_q(uint8_t *q_data, uint8_t *name_data, size_t len_name_data);
 size_t len_dns_q(size_t len_name_data);
 
 /*
+ * build_dns_q_packet creates a DNS question packet for the given question data
+ * with the given query ID and stores it in packet_data.
+ */
+void build_dns_q_packet(uint8_t *q_packet_data,
+                        uint8_t *q_data,
+                        size_t  len_q_data,
+                        uint8_t id);
+
+/*
+ * len_dns_q_packet returns the length of the DNS packet for the question data
+ * with the given length.
+ */
+size_t len_dns_q_packet(size_t len_q_data);
+
+/*
  * id, qdc, ac, auc, and ad should be uint16, but this leads to issues with
  * endianness. In all of the packets we're sending and receiving, there
  * shouldn't be any values that overflow 8 bits, so we can just use the second
@@ -141,8 +156,8 @@ struct dns_a_bdy {
 };
 
 struct dns_a_a {
-	struct dns_label *name;
-	struct dns_a_bdy bdy;
+	struct   dns_label *name;
+	struct   dns_a_bdy bdy;
 	uint32_t ip; /* 32-bit integer encoding an IP address */
 };
 

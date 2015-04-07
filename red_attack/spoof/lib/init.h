@@ -1,6 +1,8 @@
 /*
  * init provides functions for establish a network connection in order to send
  * DNS packets.
+ *
+ * https://www.abc.se/~m6695/udp.html
  */
 
 #include <arpa/inet.h>
