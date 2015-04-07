@@ -1,12 +1,17 @@
 CC=gcc
-CFLAGS=-std=c99 -Ofast -Wpedantic
+CFLAGS=-O3
 IDIR=lib
 ODIR=bin
 
-all: spoof
+all: spoof test
 
 spoof: spoof.o init.o
 	$(CC) $(CFLAGS) $(LIBS) -I$(IDIR) -o $(ODIR)/$@ $(ODIR)/spoof.o $(ODIR)/init.o
+
+test: dns_test
+
+dns_test: dns_test.c
+	$(CC) $(CFLAGS) $(LIBS) -I$(IDIR) -o $(ODIR)/$@ $<
 
 spoof.o: spoof.c
 	$(CC) -c $(CFLAGS) -I$(IDIR) -o $(ODIR)/$@ $<

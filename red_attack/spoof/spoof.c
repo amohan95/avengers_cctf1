@@ -1,4 +1,3 @@
-#include <assert.h>
 #include <stdlib.h>
 #include <stdio.h>
 #include <unistd.h>
@@ -10,9 +9,6 @@
 
 int main()
 {
-	struct dns_hdr hdr = { 0 };
-	/*
-	int s = sock_init();
 	struct sockaddr_in si = { 0 };
 	int si_init_ret = si_init(&si, WCACHE_IP, 53);
 	if (si_init_ret == 0) {
@@ -22,10 +18,10 @@ int main()
 		perror("si_init");
 		exit(1);
 	}
+	int s = sock_init();
 	if (close(s)) {
 		perror("close");
 		exit(1);
 	}
-	*/
 	return 0;
 }

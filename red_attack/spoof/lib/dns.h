@@ -16,5 +16,9 @@ struct dns_hdr {
 	uint16_t num_a;
 	uint16_t num_ns;
 	uint16_t num_ar;
-	struct dns_q *q_list;
+};
+
+struct dns_q {
+	uint16_t name;
+	uint16_t type;
 };
