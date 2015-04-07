@@ -10,13 +10,24 @@
 
 /*
  * build_dns_name creates the DNS encoding of the given name and stores it in
- * q_data, and returns 0 on success.
+ * name_data, and returns 0 on success.
  */
-int build_dns_name(uint8_t *q_data, char *name[], size_t name_len);
+int build_dns_name(uint8_t *name_data, char *name[], size_t len_name);
+
+/* len_dns_name returns the length of the DNS encoding of the given name. */
+size_t len_dns_name(char *name[], size_t len_name);
 
 /*
- * len_dns_name returns the length of the DNS encoding of the given name. */
-size_t len_dns_name(char *name[], size_t name_len);
+ * build_dns_q creates a DNS A record question for the given name data and
+ * stores it in q_data.
+ */
+void build_dns_q(uint8_t *q_data, uint8_t *name_data, size_t len_name_data);
+
+/*
+ * len_dns_q returns the length of the DNS A record question for the name data
+ * with the given length.
+ */
+size_t len_dns_q(size_t len_name_data);
 
 /*
  * id, qdc, ac, auc, and ad should be uint16, but this leads to issues with
@@ -72,6 +83,11 @@ struct dns_q_bdy {
 	uint8_t type;
 	uint8_t space_class;
 	uint8_t class;
+};
+
+union dns_q_bdy_data {
+	struct dns_q_bdy bdy;
+	uint8_t data[4];
 };
 
 /*
