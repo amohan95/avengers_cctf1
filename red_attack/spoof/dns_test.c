@@ -19,15 +19,22 @@ int main()
 	};
 
 	size_t len_name = sizeof name / sizeof *name;
-	size_t len = len_dns_q(name, len_name);
-	uint8_t q_data[len];
+	size_t len_name_data = len_dns_name(name, len_name);
+	uint8_t name_data[len_name_data];
 
-	if (build_dns_q(q_data, 1, name, len_name) != 0) {
+	if (build_dns_name(name_data, name, len_name) != 0) {
 		perror("build_dns_q");
 	}
 
-	for (int i = 0; i < len; ++i) {
-		printf("%i\n", q_data[i]);
+	size_t len_q_data = len_dns_q(len_name_data);
+	uint8_t q_data[len_q_data];
+	build_dns_q(q_data, name_data, len_name_data);
+	size_t len_q_packet_data = len_dns_q_packet(len_q_data);
+	uint8_t q_packet_data[len_q_packet_data];
+	build_dns_q_packet(q_packet_data, q_data, len_q_data, 1);
+
+	for (size_t i = 0; i < len_q_packet_data; ++i) {
+		printf("%i\n", q_packet_data[i]);
 	}
 
 	return 0;
