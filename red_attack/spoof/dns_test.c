@@ -9,7 +9,7 @@
 
 int main()
 {
-	char *name[] = {
+	char *name_raw[] = {
 		TARGET_HOSTNAME,
 		TESTBED_HOSTNAME,
 		"USC430",
@@ -18,15 +18,15 @@ int main()
 		"net",
 	};
 
-	size_t len_name = sizeof name / sizeof *name;
-	size_t len = len_dns_q(name, len_name);
-	uint8_t q_data[len];
+	size_t len_name_raw = sizeof name_raw / sizeof *name_raw;
+	size_t len_name = len_dns_name(name_raw, len_name_raw);
+	uint8_t q_data[len_name];
 
-	if (build_dns_q(q_data, 1, name, len_name) != 0) {
+	if (build_dns_name(q_data, name_raw, len_name_raw) != 0) {
 		perror("build_dns_q");
 	}
 
-	for (int i = 0; i < len; ++i) {
+	for (size_t i = 0; i < len_name; ++i) {
 		printf("%i\n", q_data[i]);
 	}
 

@@ -1,14 +1,28 @@
+/*
+ * dns provides functions for creating the DNS packets necessary to execute a
+ * DNS spoofing attack.
+ *
+ * http://www.ccs.neu.edu/home/amislove/teaching/cs4700/fall09/handouts/project1-primer.pdf
+ */
+
 #include <stddef.h>
 #include <stdint.h>
 
-/* For more info: http://www.ccs.neu.edu/home/amislove/teaching/cs4700/fall09/handouts/project1-primer.pdf */
+/*
+ * build_dns_name creates the DNS encoding of the given name and stores it in
+ * q_data, and returns 0 on success.
+ */
+int build_dns_name(uint8_t *q_data, char *name[], size_t name_len);
 
-int build_dns_q(uint8_t *q_data, uint16_t id, char *name[], size_t len);
-size_t len_dns_q(char *name[], size_t len);
+/*
+ * len_dns_name returns the length of the DNS encoding of the given name. */
+size_t len_dns_name(char *name[], size_t name_len);
 
 /*
  * id, qdc, ac, auc, and ad should be uint16, but this leads to issues with
- * endianness. Ugly hack.
+ * endianness. In all of the packets we're sending and receiving, there
+ * shouldn't be any values that overflow 8 bits, so we can just use the second
+ * byte of the uint16 to "ensure" big-endianness. An ugly hack.
  */
 struct dns_hdr {
 	uint8_t space_id;
@@ -24,6 +38,11 @@ struct dns_hdr {
 	uint8_t ad;
 };
 
+/*
+ * To send the packet over the network, we need to serialize it into bytes. We
+ * can set the values of the struct, and the byte array will be its serialized
+ * form.
+ */
 union dns_hdr_data {
 	struct dns_hdr hdr;
 	uint8_t data[12];
@@ -34,7 +53,6 @@ union dns_hdr_data {
  * variable-sized questions or answers.
  */
 struct dns_packet {
-
 	struct dns_hdr hdr;
 	struct dns_q *q;
 	struct dns_a_a *a;
@@ -50,8 +68,10 @@ struct dns_packet {
 };
 
 struct dns_q_bdy {
-	uint16_t type;
-	uint16_t class;
+	uint8_t space_type;
+	uint8_t type;
+	uint8_t space_class;
+	uint8_t class;
 };
 
 /*
@@ -93,10 +113,14 @@ struct dns_label {
 };
 
 struct dns_a_bdy {
-	uint16_t type;
-	uint16_t class;
-	uint16_t ttl;
-	uint16_t rlength;
+	uint8_t space_type;
+	uint8_t type;
+	uint8_t space_class;
+	uint8_t class;
+	uint8_t space_ttl;
+	uint8_t ttl;
+	uint8_t space_rlength;
+	uint8_t rlength;
 
 };
 
@@ -107,7 +131,7 @@ struct dns_a_a {
 };
 
 struct dns_a_ns {
-	struct dns_label *name; /* name */
+	struct dns_label *name;
 	struct dns_a_bdy bdy;
 	struct dns_label *ns_name;
 };
