@@ -1,5 +1,5 @@
 #!/bin/bash
-# Get the (hopefully) real MAC address for each host
+# Gets the (hopefully) real MAC address for each host
 
 MAC_FILE='mac.sh'
 
@@ -22,4 +22,4 @@ for i in "${!MAC[@]}"; do
 done
 
 # Add this machine's MAC
-echo "MAC['1.1.1.51']='$(cat /sys/class/net/eth0/address)'" >> "$MAC_FILE"
+echo "MAC['1.1.1.51']='$(cat /sys/class/net/eth3/address)'" >> "$MAC_FILE"
