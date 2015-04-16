@@ -11,9 +11,9 @@ else
     sudo ./ip_map_creator.sh "${servers_file}" "${WCACHE_IP}" _w_"${ip_map_file}"
     diff -w --unchanged-line-format= --old-line-format= --new-line-format='%L' "${ip_map_file}" _w_"${ip_map_file}" > _white_diffs.txt
     while read line; do
-      set -- "${line}"
-      servername=$1
-      ip_addr=$2
+      stringarr=($line)
+      servername=${stringarr[0]}
+      ip_addr=${stringarr[1]}
       sudo ./wcache_flush.sh "${servername}"
       counter=$((counter+1))
       echo "Flushed ${servername} with ip ${ip_addr} from white cache"
