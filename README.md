@@ -15,7 +15,7 @@ Blue Tasks:
 5. Learn how you would write rules for iptables to filter traffic with some characteristics, e.g., by protocol, sender IP, length, TCP flags, etc. You may need to write those rules manually during the exercise but make sure you have tried to write them while preparing for the exercise and that they work correctly. You can check correctness by generating attack traffic with some signature (e.g., packet length, sender IP, protocol, etc.), writing a rule to filter it and checking that that traffic is dropped. You can check for drops in two ways. First, you could run your monitoring software on the interface leading to the server. Second, you could use an option with iptables that lets you see counts of times a rule was matched. It may be advisable to try both methods for measuring correctness as the first measures what goes to the server and the second shows you that the rule was activated by attack traffic. (Jerry)
     You want a Forward rule. Less Chance that you will cut you off
 
-6. Develop defenses against Slowloris. You can do that by modifying nweb's code to detect and kill connections that have been open for a while (in a separate thread) or you can install one of the server's that is immune to Slowloris. (Hard) (Need someone)
+6. Develop defenses against Slowloris. You can do that by modifying nweb's code to detect and kill connections that have been open for a while (in a separate thread) or you can install one of the server's that is immune to Slowloris. (Hard) (Will)
     Modify the server code
     Kill all connects longer than 0.5 seconds
 
