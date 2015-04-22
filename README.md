@@ -23,7 +23,7 @@ Red Tasks:
 
 1. Develop attacks that flood the link between the gateway and the server. You can use flooder tool for this. Think how you can use IP spoofing and other flooder options to make this traffic hard to identify and hard to filter. (Raymond)
 
-2. Develop attacks that may crash the server because they send malformed packets (e.g., incorrect fragments or incorrect TCP flags).The server may or may not crash when receiving these packets but give it a try. You may modify flooder's code for this. The source will be installed in /usr/local/src/flooder on client machines. You may also write your own code to use libnet directly. Libnet will be installed on client machines. (Hard, optional) (Need someone) (let's try this if we can finish everything else?)
+2. Develop attacks that may crash the server because they send malformed packets (e.g., incorrect fragments or incorrect TCP flags).The server may or may not crash when receiving these packets but give it a try. You may modify flooder's code for this. The source will be installed in /usr/local/src/flooder on client machines. You may also write your own code to use libnet directly. Libnet will be installed on client machines. (Hard, optional) (Grace TRYING ):) (let's try this if we can finish everything else?)
 
 3. Develop attacks that flood the link or the server with too many HTTP requests. You may want to script wget command for this. (Donil)
 
